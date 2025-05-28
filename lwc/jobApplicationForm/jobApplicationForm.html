@@ -1,0 +1,78 @@
+<template>
+    <div class="form-wrapper">
+        <lightning-card title="MPT Job Application Form" class="custom-card">
+            <div class="slds-m-around_medium custom-form">
+            <!-- Full Name -->
+            <div class="slds-form-element input-narrow">
+                <label class="slds-form-element__label custom-label">Full Name<span class="required">*</span></label>
+                <div class="slds-form-element__control">
+                    <input type="text" class="slds-input styled-input" data-field="fullName" value={fullName} onchange={handleInputChange} />
+                    <p class="slds-text-color_error">{fullNameError}</p>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="slds-form-element input-narrow">
+                <label class="slds-form-element__label custom-label">Email<span class="required">*</span></label>
+                <div class="slds-form-element__control">
+                    <input type="email" class="slds-input styled-input" data-field="email" value={email} onchange={handleInputChange} />
+                    <p class="slds-text-color_error">{emailError}</p>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="slds-form-element input-narrow">
+                <label class="slds-form-element__label custom-label">Phone Number<span class="required">*</span></label>
+                <div class="slds-form-element__control">
+                    <input type="tel" class="slds-input styled-input" data-field="phoneNumber" value={phoneNumber} onchange={handleInputChange} pattern="[0-9]{10}" />
+                    <p class="slds-text-color_error">{phoneNumberError}</p>
+                </div>
+            </div>
+
+            <!-- Job Position -->
+            <div class="slds-form-element input-narrow">
+                <label class="slds-form-element__label custom-label">Job Position<span class="required">*</span></label>
+                <div class="slds-form-element__control">
+                    <select class="slds-select styled-input" data-field="jobPosition" value={jobPosition} onchange={handleInputChange}>
+                        <option value="">-- Select Job Position --</option>
+                        <option value="Associate Software Engineer">Associate Software Engineer</option>
+                        <option value="Senior Software Engineer">Senior Software Engineer</option>
+                        <option value="Team Lead">Team Lead</option>
+                        <option value="Project Manager">Project Manager</option>
+                    </select>
+                    <p class="slds-text-color_error">{jobPositionError}</p>
+                </div>
+            </div>
+
+             <!-- Available Start Date -->
+            <div class="slds-form-element input-narrow">
+                <label class="slds-form-element__label custom-label">Available Start Date<span class="required">*</span></label>
+                <div class="slds-form-element__control">
+                    <input type="date" class="slds-input styled-input" data-field="availableStartDate" value={availableStartDate} onchange={handleInputChange} />
+                    <p class="slds-text-color_error">{availableStartDateError}</p>
+                </div>
+            </div>
+
+              <!-- Resume Upload -->
+            <div class="slds-form-element input-narrow">
+                <label class="slds-form-element__label custom-label">Upload Resume<span class="required">*</span></label>
+                <div class="slds-form-element__control styled-upload">
+                    <lightning-file-upload name="resumeUploader" accept=".pdf,.doc,.docx" record-id={temporaryRecordId} onuploadfinished={handleUploadFinished}></lightning-file-upload>
+                    <p class="slds-text-color_error">{resumeError}</p>
+                </div>
+            </div>
+            <template if:true={showResumeSuccessMessage}>
+    <p class="success-message" style="color: green; font-weight: bold;">Resume uploaded successfully!</p>
+</template>
+
+
+
+            <!-- Submit Button -->
+            <lightning-button label="Submit" variant="brand" onclick={handleSubmit} class="slds-m-top_medium"></lightning-button>
+            <template if:true={showSuccessMessage}>
+    <p class="success-message">APPLICATION FORM SUBMITTED SUCCESSFULLY</p>
+</template>
+        </div>
+    </lightning-card>
+    </div>
+</template>
